@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title class="font-bold text-3xl" >CoronaVirus Tracker Application</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link rel="stylesheet" type="text/css" media="all" 
+         href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+      <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+   </head>
+   <body>
+      <h1 style="color:maroon text-2xl text-red-400">CoronaVirus Tracking App</h1>
+      <p>This application lists the current number of cases reported across the globe.</p>
+      
+    <div class="container-fluid text-sm-center p-5 bg-light my-4"> <!-- bg-light is background color & p-5 is padding -->
+        <h1 class="display-2 mb-2">Total Cases Reported as of today</h1>
+        <h3 class="" th:text="${#numbers.formatDecimal(totalReportedCases,0, 'COMMA', 0, 'POINT')}"></h3>
+        <p>New cases reported from prev day:</p>
+        <h4 class="" th:text="${#numbers.formatDecimal(totalNewCases,0, 'COMMA', 0, 'POINT')}"></h4>
+    </div>
+      
+      <!-- <p th:text="${locationStats}">Placeholder</p> -->
+      
+      <div class="container">
+      <table class="table">
+         <tr>
+            <th scope="col">State</th>
+            <th>Country</th>
+            <th>Total Cases Reported</th>
+            <th>Changes since last day</th>
+         </tr>
+         <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.state}"></td>
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+         </tr>
+      </table>
+      </div>
+   </body>
+</html>
